@@ -29,13 +29,7 @@ const array = dataRows.data.slice(1, dataRows.data.length - 1).map( res => {
     const deaths = res[4];
     const recovered = res[5];
     return { country, state, confirmed, deaths, recovered }
-    // return new Record( country, state, confirmed, deaths, recovered )
 })
-
-
-// module.exports = () {
-
-// }
 
 function fun (arrayData) {
     var total = 0
@@ -50,8 +44,8 @@ function fun (arrayData) {
     return { total, australia };
 }
 
-if (array.length > 2) {
-    console.log('data successfully parsed')
-}
+// if (array.length > 2) {
+//     console.log('data successfully parsed')
+// }
 
 module.exports = array;

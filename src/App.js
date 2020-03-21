@@ -1,48 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
 import './css/App.css';
-import axios from 'axios';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-// import array from './DataParser'
+
+import Navbar from './components/navbar.components'
+import Tab from './components/tab.component'
+import List from './components/list.component'
+
 
 
 export default class App extends React.Component {
-  constructor(props){
-    super(props)
-
-    this.state = {
-      total: 0,
-      recovered: 0,
-      deaths: 0,
-    }
-  }
-
-  componentDidMount() {
-    axios.get('http://localhost:8080/data/world')
-      .then( res => {
-        console.log(res);
-        this.setState({
-          total: res.data.w_confirmed,
-          recovered: res.data.w_recovered,
-          deaths: res.data.w_deaths,
-        })
-      })
-  }
-
   render() {
     return (
-      <div className="App">
-        <p>{this.state.total}</p>
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a className="App-link" href="https://reactjs.org" target="_blank"rel="noopener noreferrer">
-            Learn React
-          </a>
-        </header>
-        
+      <div className='container'>
+        <Router>
+          <Navbar />
+          <br />          
+          {/* <Route  */}
+          <Route exact path='/' component={List} />
+          <Route path='/tab' component={Tab} />
+
+        </Router>
       </div>
     );
   }
