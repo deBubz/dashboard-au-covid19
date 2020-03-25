@@ -1,9 +1,6 @@
 // import from data parser
 const dataArray = require('./data.parse');
 
-// console.log(data);
-
-
 // bunch of variables
 let world_confirmed = 0, 
 world_recovered = 0, 
@@ -15,9 +12,6 @@ for (let i = 0; i < dataArray.length; i++) {
     world_recovered += Number(dataArray[i].recovered);
 }
 
-
-
-
 function all_data() { return dataArray; }
 function world_stat() {
     return {
@@ -27,12 +21,23 @@ function world_stat() {
     }
 }
 
-
 // export
 let dataHandler = {
     all_data: all_data(),
-    world_data: world_stat(),
+    world_stat: world_stat(),
 };
 
 module.exports = dataHandler;
 
+// function fun (arrayData) {
+//     var total = 0
+//     var australia = 0
+
+//     for (let index = 0; index < arrayData.length; index++) {
+//         const element = arrayData[index];
+
+//         if(element.country === 'Australia') { australia += Number(element.confirmed); }
+//         total += Number(element.confirmed);
+//     }
+//     return { total, australia };
+// }

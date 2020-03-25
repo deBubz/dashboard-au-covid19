@@ -1,7 +1,7 @@
 const Papa = require('papaparse');
 const fs = require('fs');
 
-// figgure this out later
+// figure this out later
 // const source = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/03-19-2020.csv'
 
 const dataPath = __dirname + '/data.csv'
@@ -31,21 +31,6 @@ const array = dataRows.data.slice(1, dataRows.data.length - 1).map( res => {
     return { country, state, confirmed, deaths, recovered }
 })
 
-function fun (arrayData) {
-    var total = 0
-    var australia = 0
 
-    for (let index = 0; index < arrayData.length; index++) {
-        const element = arrayData[index];
-
-        if(element.country === 'Australia') { australia += Number(element.confirmed); }
-        total += Number(element.confirmed);
-    }
-    return { total, australia };
-}
-
-// if (array.length > 2) {
-//     console.log('data successfully parsed')
-// }
 
 module.exports = array;

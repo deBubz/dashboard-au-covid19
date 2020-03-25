@@ -1,20 +1,25 @@
 // import router
 const router = require('express').Router();
-const dataHandler = require('./data.handler')
+const worldData = require('./world.handler');
+const auData = require('./australia.handler');
 
 // all the data here should return as json object
 
 router.route('/').get((req, res) => {
-    res.json(dataHandler.all_data).send();
+    res.json(worldData.all_data)
 })
 
-router.route('/world').get((req, res) => {
-    res.json(dataHandler.world_data).end();
+router.route('/total').get((req, res) => {
+    res.json(worldData.world_stat);
 })
 
-// router.route('/au').get((req, res) => {
+router.route('/au').get((req, res) => {
+    res.json(auData.au_data);
+})
 
-// })
+router.route('/au/total').get((req, res) => {
+    res.json(auData.au_total_data);
+})
 
 
 module.exports = router;
