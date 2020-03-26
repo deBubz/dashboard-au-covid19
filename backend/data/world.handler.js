@@ -28,16 +28,3 @@ let dataHandler = {
 };
 
 module.exports = dataHandler;
-
-// function fun (arrayData) {
-//     var total = 0
-//     var australia = 0
-
-//     for (let index = 0; index < arrayData.length; index++) {
-//         const element = arrayData[index];
-
-//         if(element.country === 'Australia') { australia += Number(element.confirmed); }
-//         total += Number(element.confirmed);
-//     }
-//     return { total, australia };
-// }
