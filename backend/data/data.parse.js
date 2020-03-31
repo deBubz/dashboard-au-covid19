@@ -77,21 +77,15 @@ let CountryData = (country) => {
 }
 
 function TotalCountryData(country) {
-    let cData = CountryData(country),
-        totalCountryData = {
-            _country: cData[0]._country,
-            _confirmed: 0,
-            _recovered: 0,
-            _deaths: 0,
-        };
-    
-    cData.forEach((elem) => {
-        totalCountryData._confirmed += Number(elem._confirmed); 
-        totalCountryData._recovered += Number(elem._recovered); 
-        totalCountryData._deaths += Number(elem._deaths);
+    let found;
+    parsedData.every((elem) => {
+        if(elem._country.toLowerCase() === country) {
+            found = elem;
+            return false;
+        } else return true;
     });
 
-    return totalCountryData;
+    return found;
 }
 
 // export this data
