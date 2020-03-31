@@ -27,7 +27,7 @@ Papa.parse( data , {
 // raw data parsed from the csv
 // cut first and last non-data part of the csv
 const rawData = dataRows.data.slice(1, dataRows.data.length - 1)
-    .map(res => new Country(res[3], res[2], res[7], res[9], res[8]));
+    .map(res => new Country(res[3], res[7], res[9], res[8], res[2]));
 
     // lets modify that array
 function unique(arr) {
@@ -49,7 +49,7 @@ uniqueCountries.forEach((element) => {
             d += Number(country._deaths);
         }
     })
-    parsedData.push(new Country(element, '', conf, rec, d));
+    parsedData.push(new Country(element, conf, rec, d));
 });
 
 let worldData = {
@@ -69,18 +69,29 @@ let CountryData = (country) => {
     let cData = [];
     rawData.forEach(elem => {
         if(elem._country.toLowerCase() === country.toLowerCase()) {
-            console.log(elem);
+            // console.log(elem);
             cData.push(elem);
         }
     })
     return cData;
 }
 
-function TotalCountryData(name) {
-    return {
-        _name: name,
-        _total: 0
-    }
+function TotalCountryData(country) {
+    let cData = CountryData(country),
+        totalCountryData = {
+            _country: cData[0]._country,
+            _confirmed: 0,
+            _recovered: 0,
+            _deaths: 0,
+        };
+    
+    cData.forEach((elem) => {
+        totalCountryData._confirmed += Number(elem._confirmed); 
+        totalCountryData._recovered += Number(elem._recovered); 
+        totalCountryData._deaths += Number(elem._deaths);
+    });
+
+    return totalCountryData;
 }
 
 // export this data

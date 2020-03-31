@@ -13,6 +13,7 @@ router.route('/').get((req, res) => {
     }
 });
 
+// world total
 router.route('/country').get((req, res) => {
     try {
         res.json(Data._parsedData);
@@ -21,6 +22,7 @@ router.route('/country').get((req, res) => {
     }
 });
 
+// total world
 router.route('/total').get((req, res) => {
     try {
         res.json(Data._worldTotalData);
@@ -29,21 +31,26 @@ router.route('/total').get((req, res) => {
     }
 });
 
+// query country and their state numbers
 router.route('/country/:country').get((req, res) => {
     try {
-        let data = Data._countryData(req.params.country);
-        if (data.lengh > 0) res.json(Data._countryData(req.params.country));
+        let cData = Data._countryData(req.params.country);
+        // console.log(cData);
+        if (cData.length > 0) res.json(cData);
         else throw  req.params.country + " is an invalid Country";
     } catch (error) {
         res.status(400).json({Error:  error});
     }
 });
 
+// total of country
 router.route('/country/:country/total').get((req, res) => {
-    res.json({
-        country: req.params.country,
-        total: 0,
-    });
+    try {
+        let cData = Data._countryTotalData(req.params.country);
+        res.json(cData);
+    } catch (error) {
+        res.status(400).json({Error: error});
+    }
 });
 
 module.exports = router;
