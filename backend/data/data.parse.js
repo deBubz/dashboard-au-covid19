@@ -27,17 +27,17 @@ Papa.parse( data , {
 // raw data parsed from the csv
 // cut first and last non-data part of the csv
 const rawData = dataRows.data.slice(1, dataRows.data.length - 1)
-    .map(res => new Country(res[3].toLowerCase(), res[2].toLowerCase(), res[7], res[9], res[8]));
+    .map(res => new Country(res[3], res[2], res[7], res[9], res[8]));
 
     // lets modify that array
-function unique(arr, prop) {
+function unique(arr) {
     return arr
-        .map((e) => e[prop])
+        .map((e) => e['_country'])
         .filter((elem , item , array) => item === array.indexOf(elem));
     }
     
 let parsedData = [];
-var uniqueCountries = unique(rawData, '_country');
+var uniqueCountries = unique(rawData);
 uniqueCountries.forEach((element) => {
     let conf = 0,
         rec = 0,
@@ -64,15 +64,32 @@ rawData.forEach(elem => {
     worldData._totalDeaths += Number(elem._deaths);
 });
 
+// get states data of country
+let CountryData = (country) => {
+    let cData = [];
+    rawData.forEach(elem => {
+        if(elem._country.toLowerCase() === country.toLowerCase()) {
+            console.log(elem);
+            cData.push(elem);
+        }
+    })
+    return cData;
+}
+
+function TotalCountryData(name) {
+    return {
+        _name: name,
+        _total: 0
+    }
+}
+
 // export this data
-let Data = {
+module.exports = {
     _rawData: rawData,
     _parsedData: parsedData,
-    _worldTotalData: worldData, 
+    _worldTotalData: worldData,
+    _countryData: (country) => CountryData(country),
+    _countryTotalData: (name) => TotalCountryData(name)
 };
 
-// console.log(dataParse._parsedData)
-// console.log(dataParse._worldTotalData)
-// console.log(dataParse._worldTotalData)
-
-module.exports = Data;
+// exports.CountryData = CountryData;
