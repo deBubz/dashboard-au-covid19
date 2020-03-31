@@ -1,4 +1,4 @@
-let method = Country.prototype;
+// let method = Country.prototype;
 // model class for countries
 
 function Country(c_name, c_state, confirmed, recovered, deaths) {

@@ -2,7 +2,7 @@
 
 ## WTF am I making
 
-- COVID stat dash board containing world info, and the latest news focusing on australia.
-- Stats board
+-   COVID stat dash board containing world info, and the latest news focusing on australia.
+-   Stats board
 
 ## Specs

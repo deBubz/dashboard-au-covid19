@@ -8,16 +8,16 @@ const Country = require('./Country.model');
 // figure this out later
 // const source = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/03-19-2020.csv'
 
-const dataPath = __dirname + '/data2.csv'
+const dataPath = __dirname + '/data2.csv';
 const data = fs.readFileSync(dataPath, "utf8");
 
 // get data 
-const dataRows = {}
+    const dataRows = {};
 Papa.parse( data , {
     // header: true,
     // preview: 4,
     transformHeader: true,
-    complete: result => {
+    complete: (result) => {
         dataRows.data = result.data;
         dataRows.error = result.errors;
         dataRows.meta = result.meta;
@@ -27,22 +27,22 @@ Papa.parse( data , {
 // raw data parsed from the csv
 // cut first and last non-data part of the csv
 const rawData = dataRows.data.slice(1, dataRows.data.length - 1)
-    .map(res => new Country(res[3].toLowerCase(), res[2].toLowerCase(), res[7], res[9], res[8]))
+    .map(res => new Country(res[3].toLowerCase(), res[2].toLowerCase(), res[7], res[9], res[8]));
 
     // lets modify that array
 function unique(arr, prop) {
     return arr
-        .map(e => e[prop])
+        .map((e) => e[prop])
         .filter((elem , item , array) => item === array.indexOf(elem));
     }
     
-let parsedData = []
+let parsedData = [];
 var uniqueCountries = unique(rawData, '_country');
-uniqueCountries.forEach(element => {
+uniqueCountries.forEach((element) => {
     let conf = 0,
         rec = 0,
         d = 0;
-    rawData.forEach(country => {
+    rawData.forEach((country) => {
         if(element === country._country){
             conf += Number(country._confirmed);
             rec += Number(country._recovered);
@@ -62,14 +62,14 @@ rawData.forEach(elem => {
     worldData._totalConfirmed += Number(elem._confirmed);
     worldData._totalRecovered += Number(elem._recovered);
     worldData._totalDeaths += Number(elem._deaths);
-})
+});
 
 // export this data
 let Data = {
     _rawData: rawData,
     _parsedData: parsedData,
     _worldTotalData: worldData, 
-}
+};
 
 // console.log(dataParse._parsedData)
 // console.log(dataParse._worldTotalData)
