@@ -1,5 +1,16 @@
 * Task
 * Notes
 ** backend
+*** API docs
+**** /api/ 
+     - default, show raw data
+**** /api/total/
+     - show world total numbers
+**** /api/country/ 
+     - show the totals of each country (country, state='', numbers
+**** /api/country/:country
+     - show individual state of a country
+**** /api/country/:country/total/
+     - show totals of a country
 ** frontend
 * Docs

@@ -27,4 +27,7 @@ let dataHandler = {
     world_stat: world_stat(),
 };
 
+
+// console.log(all_data())
+
 module.exports = dataHandler;

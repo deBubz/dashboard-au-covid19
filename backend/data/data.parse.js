@@ -1,5 +1,9 @@
 const Papa = require('papaparse');
 const fs = require('fs');
+const Country = require('./Country.model');
+
+// read from the csv file
+// export the data as a class array
 
 // figure this out later
 // const source = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/03-19-2020.csv'
@@ -20,17 +24,55 @@ Papa.parse( data , {
     }
 })
 
-// parse to array data
+// raw data parsed from the csv
 // cut first and last non-data part of the csv
-const array = dataRows.data.slice(1, dataRows.data.length - 1).map( res => {
-    const country = res[3];
-    const state = res[2];
-    const confirmed = res[7];
-    const deaths = res[8];
-    const recovered = res[9];
-    return { country, state, confirmed, deaths, recovered }
+const rawData = dataRows.data.slice(1, dataRows.data.length - 1)
+    .map(res => new Country(res[3].toLowerCase(), res[2].toLowerCase(), res[7], res[9], res[8]))
+
+    // lets modify that array
+function unique(arr, prop) {
+    return arr
+        .map(e => e[prop])
+        .filter((elem , item , array) => item === array.indexOf(elem));
+    }
+    
+let parsedData = []
+var uniqueCountries = unique(rawData, '_country');
+uniqueCountries.forEach(element => {
+    let conf = 0,
+        rec = 0,
+        d = 0;
+    rawData.forEach(country => {
+        if(element === country._country){
+            conf += Number(country._confirmed);
+            rec += Number(country._recovered);
+            d += Number(country._deaths);
+        }
+    })
+    parsedData.push(new Country(element, '', conf, rec, d));
+});
+
+let worldData = {
+    _totalConfirmed: 0,
+    _totalRecovered: 0,
+    _totalDeaths: 0,
+}
+
+rawData.forEach(elem => {
+    worldData._totalConfirmed += Number(elem._confirmed);
+    worldData._totalRecovered += Number(elem._recovered);
+    worldData._totalDeaths += Number(elem._deaths);
 })
 
+// export this data
+let Data = {
+    _rawData: rawData,
+    _parsedData: parsedData,
+    _worldTotalData: worldData, 
+}
 
+// console.log(dataParse._parsedData)
+// console.log(dataParse._worldTotalData)
+// console.log(dataParse._worldTotalData)
 
-module.exports = array;
+module.exports = Data;

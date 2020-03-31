@@ -1,25 +1,25 @@
 // import router
 const router = require('express').Router();
-const worldData = require('./world.handler');
-const auData = require('./australia.handler');
+const Data = require('./data.parse')
 
 // all the data here should return as json object
 
 router.route('/').get((req, res) => {
-    res.json(worldData.all_data)
+    res.json(Data._rawData);
 })
 
-router.route('/total').get((req, res) => {
-    res.json(worldData.world_stat);
+router.route('/country').get((req, res) => {
+    res.json(Data._parsedData);
 })
 
-router.route('/au').get((req, res) => {
-    res.json(auData.au_data);
+// console.log(Data._worldTotalData);
+router.route('/country/total').get((req, res) => {
+    res.json(Data._worldTotalData);
 })
 
-router.route('/au/total').get((req, res) => {
-    res.json(auData.au_total_data);
-})
+// router.route('/au/total').get((req, res) => {
+//     res.json(auData.au_total_data);
+// })
 
 
 module.exports = router;

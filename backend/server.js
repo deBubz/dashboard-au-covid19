@@ -13,7 +13,7 @@ app.use(express.json());
 
 // routing config
 const dataRouter = require('./data/data.route')
-app.use('/', dataRouter);
+app.use('/api', dataRouter);
 
 // start server
 app.listen(port, () => {
