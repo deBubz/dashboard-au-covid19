@@ -1,10 +1,8 @@
 // import router
 const router = require('express').Router();
 const Data = require('./data.parse');
-const CountryData = require('./data.parse')
 
 // all the data here should return as json object
-
 router.route('/').get((req, res) => {
     try {
         res.json(Data._rawData);

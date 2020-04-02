@@ -8,7 +8,7 @@ const Country = require('./Country.model');
 // figure this out later
 // const source = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/03-19-2020.csv'
 
-const dataPath = __dirname + '/data2.csv';
+const dataPath = __dirname + '/data3.csv';
 const data = fs.readFileSync(dataPath, "utf8");
 
 // get data 
@@ -36,6 +36,7 @@ function unique(arr) {
         .filter((elem , item , array) => item === array.indexOf(elem));
     }
     
+// each country totals
 let parsedData = [];
 var uniqueCountries = unique(rawData);
 uniqueCountries.forEach((element) => {
@@ -52,6 +53,7 @@ uniqueCountries.forEach((element) => {
     parsedData.push(new Country(element, conf, rec, d));
 });
 
+// world totals
 let worldData = {
     _totalConfirmed: 0,
     _totalRecovered: 0,
@@ -68,14 +70,12 @@ rawData.forEach(elem => {
 let CountryData = (country) => {
     let cData = [];
     rawData.forEach(elem => {
-        if(elem._country.toLowerCase() === country.toLowerCase()) {
-            // console.log(elem);
-            cData.push(elem);
-        }
-    })
+        if(elem._country.toLowerCase() === country.toLowerCase()) 
+            cData.push(elem);})
     return cData;
 }
 
+// total data of a single country
 function TotalCountryData(country) {
     let found;
     parsedData.every((elem) => {
@@ -96,5 +96,3 @@ module.exports = {
     _countryData: (country) => CountryData(country),
     _countryTotalData: (name) => TotalCountryData(name)
 };
-
-// exports.CountryData = CountryData;
