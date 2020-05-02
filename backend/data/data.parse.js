@@ -8,7 +8,7 @@ const Country = require('./Country.model');
 // figure this out later
 // const source = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/03-19-2020.csv'
 
-const dataPath = __dirname + '/data3.csv';
+const dataPath = __dirname + '/data4.csv';
 const data = fs.readFileSync(dataPath, "utf8");
 
 // get data 

@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default class Tab extends React.Component {
-    componentWillMount() {
+    componentDidMount() {
         document.title = "Au Covid | Tab";
         console.log(document.title);
     }
