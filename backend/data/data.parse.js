@@ -12,7 +12,7 @@ const dataPath = __dirname + '/data4.csv';
 const data = fs.readFileSync(dataPath, "utf8");
 
 // get data 
-    const dataRows = {};
+const dataRows = {};
 Papa.parse( data , {
     // header: true,
     // preview: 4,
@@ -29,7 +29,7 @@ Papa.parse( data , {
 const rawData = dataRows.data.slice(1, dataRows.data.length - 1)
     .map(res => new Country(res[3], res[7], res[9], res[8], res[2]));
 
-    // lets modify that array
+   // lets modify that array
 function unique(arr) {
     return arr
         .map((e) => e['_country'])
