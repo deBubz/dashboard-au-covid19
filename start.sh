@@ -2,10 +2,10 @@
 
 cd frontend
 
-sleep 2
+sleep 1
 echo ""
 echo "== starting development instances =="
 echo ""
-sleep 3
+sleep 1
 
 npm run dev
