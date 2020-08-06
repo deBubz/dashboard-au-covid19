@@ -1,11 +1,13 @@
 #!/bin/bash
 
-cd frontend
+## not working atm
 
-sleep 1
-echo ""
-echo "== starting development instances =="
-echo ""
-sleep 1
+# cd frontend
 
-npm run dev
+# sleep 1
+# echo ""
+# echo "== starting development instances =="
+# echo ""
+# sleep 1
+
+# npm run dev
