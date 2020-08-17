@@ -25,7 +25,7 @@ export default class Main extends React.Component {
 
     componentDidMount() {
         document.title = "Au Covid Dashboard | Main";
-        axios.get('http://localhost:8080/api/country')
+        axios.get('/api/country')
             .then(res => {
                 this.setState({
                     initialWorld: [...res.data],
